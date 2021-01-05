@@ -1,5 +1,13 @@
 <template>
   <form @submit.prevent>
+    <div class="rating">
+    <template v-for="(n, index) in max">
+        <i class="material-icons" :key="index">
+          {{ rating >= n ? 'star' : (rating > n - 1) ? 'star_half' : 'star_border' }}
+        </i>
+    </template>
+    <span>{{rating}}</span>
+    </div>
     <span>Dates</span>
       <DatePicker
         v-model="range"
@@ -31,7 +39,6 @@
   </form>
 </template>
 <script>
-
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 
 export default {
@@ -43,13 +50,18 @@ export default {
       type: Array,
       default: () => []
     },
-    dates: {
+    chosenDates: {
       type: Object,
-      default: () => {}
+      default () {
+        return {
+          start: null,
+          end: null
+        }
+      }
     },
     rating: {
       type: Number,
-      default: 0
+      default: 4.5
     },
     price: {
       type: String,
@@ -58,20 +70,21 @@ export default {
   },
   data() {
     return {
-      range: {
-        start: null,
-        end: null
-      },
       masks: {
         input: 'DD-MM-YYYY',
         type: String
       },
+      max: 5
     };
   },
   computed: {
-    minDate(){
+    range: {
+      get() { return this.chosenDates },
+      set(val) { this.$emit('update:dates', val) }
+    },
+    minDate() { 
       return new Date()
-    }
+    },
   },
 }
 </script>
@@ -80,6 +93,14 @@ form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.rating {
+  display: flex;
+  align-items: center;
+}
+.material-icons {
+  color: #37a269;
+  font-size: 16px;
 }
 .input-wrapper {
   display: flex;
