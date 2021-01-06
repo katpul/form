@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <FormComponent :disabled-dates="disabledDates"/>
+    <FormComponent :field.sync="fiedValue" :chosen-dates.sync="dates" :disabled-dates="disabledDates" :price="'298'"/>
   </div>
 </template>
 
@@ -24,6 +24,8 @@ export default {
           end: new Date(2021, 0, 27)
         },
       ],
+      dates: null,
+      fiedValue: null
     }
   }
 }
