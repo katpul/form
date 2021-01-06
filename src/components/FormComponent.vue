@@ -45,6 +45,7 @@
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 
 export default {
+  name: 'FormComponent',
   components: {
     DatePicker
   },
