@@ -34,9 +34,6 @@ describe('Testing Component props', () => {
   it('checks the prop disabledDates', () => {
       expect(wrapper.props().disabledDates).toStrictEqual([{},{}]);
   })
-  it('checks the prop chosenDates', () => {
-    expect(wrapper.props().chosenDates).toStrictEqual({start: null, end: null});
-  })
   it('checks the prop minDate', () => {
     expect(wrapper.props().minDate).toStrictEqual(new Date(2021, 0, 21));
   })
